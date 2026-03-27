@@ -39,7 +39,10 @@ class Settings:
         "http://127.0.0.1:3000",
         "http://127.0.0.1:5173",
         "http://localhost:8001",
-        "http://localhost:8000"
+        "http://localhost:8000",
+        # 生产环境：在这里加上你的前端域名，例如：
+        # "https://your-frontend.vercel.app",
+        # "https://your-frontend.netlify.app",
     ]
 
     # ---- 大模型配置 ----
@@ -68,46 +71,43 @@ class Settings:
         """拼接 OSS 公网访问 URL 前缀，如 https://bucket.oss-cn-shanghai.aliyuncs.com/"""
         return f"https://{self.OSS_BUCKET_NAME}.{self.OSS_ENDPOINT}/"
 
-    # ---- PostgreSQL 数据库配置 ----
-    # 从 .env 文件读取，格式说明：
-    #   postgresql+asyncpg://用户名:密码@主机:端口/数据库名
-    #   asyncpg 是异步驱动，比同步驱动性能更好，适合 FastAPI
-    DB_HOST: str = os.getenv("DB_HOST", "localhost")
-    DB_PORT: str = os.getenv("DB_PORT", "5432")       # PostgreSQL 默认端口
+    # ---- PostgreSQL 数据库配置（暂时停用）----
+    # DB_HOST: str = os.getenv("DB_HOST", "localhost")
+    # DB_PORT: str = os.getenv("DB_PORT", "5432")
 
-    # bi_test 数据库
-    DB_USER: str = os.getenv("DB_USER", "postgres")
-    DB_PASSWORD: str = os.getenv("DB_PASSWORD", "")
-    DB_NAME: str = os.getenv("DB_NAME", "bi_test")
+    # # bi_test 数据库
+    # DB_USER: str = os.getenv("DB_USER", "postgres")
+    # DB_PASSWORD: str = os.getenv("DB_PASSWORD", "")
+    # DB_NAME: str = os.getenv("DB_NAME", "bi_test")
 
-    # bi_prod 数据库
-    DB_USER_PROD: str = os.getenv("DB_USER_PROD", os.getenv("DB_USER", "postgres"))
-    DB_PASSWORD_PROD: str = os.getenv("DB_PASSWORD_PROD", os.getenv("DB_PASSWORD", ""))
-    DB_NAME_PROD: str = os.getenv("DB_NAME_PROD", "bi_prod")
+    # # bi_prod 数据库
+    # DB_USER_PROD: str = os.getenv("DB_USER_PROD", os.getenv("DB_USER", "postgres"))
+    # DB_PASSWORD_PROD: str = os.getenv("DB_PASSWORD_PROD", os.getenv("DB_PASSWORD", ""))
+    # DB_NAME_PROD: str = os.getenv("DB_NAME_PROD", "bi_prod")
 
-    @property
-    def DATABASE_URL(self) -> str:
-        """bi_test 异步连接 URL"""
-        return (
-            f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASSWORD}"
-            f"@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
-        )
+    # @property
+    # def DATABASE_URL(self) -> str:
+    #     """bi_test 异步连接 URL"""
+    #     return (
+    #         f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASSWORD}"
+    #         f"@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
+    #     )
 
-    @property
-    def DATABASE_URL_PROD(self) -> str:
-        """bi_prod 异步连接 URL"""
-        return (
-            f"postgresql+asyncpg://{self.DB_USER_PROD}:{self.DB_PASSWORD_PROD}"
-            f"@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME_PROD}"
-        )
+    # @property
+    # def DATABASE_URL_PROD(self) -> str:
+    #     """bi_prod 异步连接 URL"""
+    #     return (
+    #         f"postgresql+asyncpg://{self.DB_USER_PROD}:{self.DB_PASSWORD_PROD}"
+    #         f"@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME_PROD}"
+    #     )
 
-    @property
-    def DATABASE_URL_SYNC(self) -> str:
-        """bi_test 同步连接 URL（给 Alembic 使用）"""
-        return (
-            f"postgresql+psycopg2://{self.DB_USER}:{self.DB_PASSWORD}"
-            f"@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
-        )
+    # @property
+    # def DATABASE_URL_SYNC(self) -> str:
+    #     """bi_test 同步连接 URL（给 Alembic 使用）"""
+    #     return (
+    #         f"postgresql+psycopg2://{self.DB_USER}:{self.DB_PASSWORD}"
+    #         f"@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
+    #     )
 
 
 # 创建全局配置实例，其他文件 import 这个对象来使用配置
