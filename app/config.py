@@ -27,7 +27,7 @@ class Settings:
 
     # 服务启动的 Host 和端口
     HOST: str = "0.0.0.0"   # 0.0.0.0 表示允许任何 IP 访问，localhost 只允许本机
-    PORT: int = 8000
+    PORT: int = 8080
 
     # ---- CORS 跨域配置 ----
     # 前端页面（React/Vue 等）和后端不在同一个域名/端口时，浏览器会拒绝请求
@@ -38,6 +38,8 @@ class Settings:
         "http://localhost:8080",    # 其他常见前端开发端口
         "http://127.0.0.1:3000",
         "http://127.0.0.1:5173",
+        "http://localhost:8001",
+        "http://localhost:8000"
     ]
 
     # ---- 大模型配置 ----
