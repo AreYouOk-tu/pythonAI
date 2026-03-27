@@ -1,0 +1,30 @@
+# Docker 构建时忽略这些文件（不打包进镜像）
+# 类比前端：相当于 .gitignore，但是给 Docker 用的
+
+# 环境变量文件（服务器上单独配置，不能打包进镜像！）
+.env
+
+# Python 缓存文件（不需要）
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# 虚拟环境（镜像里会重新安装依赖）
+venv/
+env/
+.venv/
+
+# 开发工具文件
+.git/
+.gitignore
+.vscode/
+*.md
+
+# 本地调试文件
+debug_llm.py
+
+# 日志文件
+logs/
+*.log
