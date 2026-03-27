@@ -45,17 +45,16 @@ async def lifespan(app: FastAPI):
     #     await init_default_efficiency_data(db)
     #     await db.commit()
 
-    # ---- 启动定时任务调度器 ----
-    from app.scheduler import create_scheduler
-    scheduler = create_scheduler()
-    scheduler.start()
-    print("[启动] 定时任务调度器已启动")
+    # ---- 定时任务调度器（暂时停用）----
+    # from app.scheduler import create_scheduler
+    # scheduler = create_scheduler()
+    # scheduler.start()
+    # print("[启动] 定时任务调度器已启动")
 
     yield  # 服务正式开始运行，处理请求
 
     # ---- 服务关闭时 ----
-    scheduler.shutdown()
-    print("[关闭] 定时任务调度器已关闭")
+    # scheduler.shutdown()  # 暂时停用
     # await engine.dispose()  # 暂时停用
 
 
