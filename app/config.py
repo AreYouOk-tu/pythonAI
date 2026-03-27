@@ -27,7 +27,7 @@ class Settings:
 
     # 服务启动的 Host 和端口
     HOST: str = "0.0.0.0"   # 0.0.0.0 表示允许任何 IP 访问，localhost 只允许本机
-    PORT: int = 8080
+    PORT: int = int(os.getenv("PORT", "8080"))  # Render 会自动注入 PORT，本地默认 8080
 
     # ---- CORS 跨域配置 ----
     # 前端页面（React/Vue 等）和后端不在同一个域名/端口时，浏览器会拒绝请求
