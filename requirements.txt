@@ -26,6 +26,9 @@ python-dotenv>=1.0.1
 # 文档: https://docs.anthropic.com
 anthropic>=0.40.0
 
+# openai - OpenAI 兼容 SDK，用于调用通义千问（DashScope 兼容接口）
+openai>=1.0.0
+
 # pydantic - 数据验证和序列化库（FastAPI 内置使用）
 # 相当于 TypeScript 的类型系统，可以定义数据结构并自动校验
 pydantic>=2.10.4
@@ -36,6 +39,9 @@ httpx>=0.28.1
 
 # python-multipart - 处理表单数据和文件上传
 python-multipart>=0.0.20
+
+# Pillow - 图片处理库（文字精确渲染、裁切、合成）
+Pillow>=10.0.0
 
 # ================================
 # 数据库相关包

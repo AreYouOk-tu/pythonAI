@@ -16,7 +16,7 @@ from fastapi.openapi.docs import get_swagger_ui_html
 from fastapi.responses import HTMLResponse
 
 from app.config import settings
-from app.routes import ai
+from app.routes import ai, fixImage, imageGen
 # from app.routes import employee, efficiency, image  # 暂时停用（依赖数据库）
 
 
@@ -102,6 +102,8 @@ app.add_middleware(
 # 注册路由模块
 # ==============================
 app.include_router(ai.router)
+app.include_router(fixImage.router)
+app.include_router(imageGen.router)
 # app.include_router(employee.router)   # 暂时停用（依赖数据库）
 # app.include_router(efficiency.router)  # 暂时停用（依赖数据库）
 # app.include_router(image.router)       # 暂时停用（依赖数据库）

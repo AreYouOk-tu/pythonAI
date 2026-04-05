@@ -11,7 +11,7 @@ FastAPI 会自动用这些模型来：
 """
 
 from pydantic import BaseModel, Field
-from typing import Optional
+from typing import Optional, Union
 
 
 class EmployeeTypeOption(BaseModel):
@@ -57,4 +57,4 @@ class ApiResponse(BaseModel):
 
     code: int = Field(0, description="业务状态码，0 表示成功")
     message: str = Field("success", description="提示信息")
-    data: Optional[dict | list | str | int] = Field(None, description="业务数据")
+    data: Optional[Union[dict, list, str, int]] = Field(None, description="业务数据")

@@ -151,3 +151,4 @@ async def get_employee_type_by_value(
             "disabled": found.disabled,
         }
     )
+

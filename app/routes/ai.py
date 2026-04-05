@@ -258,3 +258,7 @@ async def manual_push_tech_news():
         message="success",
         data={"tip": "已触发推送，请查看企业微信群消息"}
     )
+
+@router.get('/records')
+async def getRecords():
+    return {"message":"你好"}
