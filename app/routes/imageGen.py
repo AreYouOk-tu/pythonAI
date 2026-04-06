@@ -9,7 +9,7 @@ from pydantic import BaseModel, Field
 from typing import Optional
 
 from app.config import settings
-from app.services.image_gen import optimize_prompt, generate_image_with_wanx
+from app.services.image_gen import generate_image_with_wanx
 
 router = APIRouter(prefix="/api/ai/image", tags=["文生图"])
 
@@ -25,18 +25,14 @@ async def generate_image(req: ImageGenRequest):
         raise HTTPException(status_code=500, detail="未配置 DASHSCOPE_API_KEY")
 
     try:
-        # 1. Claude 优化提示词
-        optimized = await optimize_prompt(req.prompt, req.style)
-
-        # 2. 通义万相生成图片
-        image_url = await generate_image_with_wanx(optimized, req.style)
+        # 通义万相生成图片
+        image_url = await generate_image_with_wanx(req.prompt, req.style)
 
         return {
             "code": 0,
             "message": "success",
             "data": {
                 "image_url": image_url,
-                "optimized_prompt": optimized,
                 "style": req.style,
             },
         }
